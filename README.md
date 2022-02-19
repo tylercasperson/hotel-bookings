@@ -23,3 +23,16 @@ The final price in a reservation is simply determined by the following formula:
 You are also given a file answers.json to check your answer. The content of the json file is simply the full list of reservations, including the prior ones. You will find all the requests in requests.json will have a corresponding entry in there and your algorithm should generate the same output in the same order.
 
 Please upload this submission in Github and send me the link. Also, make sure to answer the questions in the following page. You may use whatever software packages or dependencies you’d like. Feel free to reach out if you have any questions.
+
+        <span className='smokingOption'>
+          <a href='https://www.flaticon.com/free-icons/cigar' title='cigar icons'>
+            Cigar icons created by Freepik - Flaticon
+          </a>
+        </span>
+        <span className='smokingOption'>
+          <a href='https://www.flaticon.com/free-icons/no-smoking' title='no smoking icons'>
+            No smoking icons created by Triangle Squad - Flaticon
+
+<a href="https://www.flaticon.com/free-icons/single-bed" title="single bed icons">Single bed icons created by Good Ware - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/bed" title="bed icons">Bed icons created by xnimrodx - Flaticon</a>
