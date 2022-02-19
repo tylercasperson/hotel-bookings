@@ -152,9 +152,7 @@
   margin-top: 45vh;
   margin-left: 1vw;
 }
-
 .toggleSwitch:checked[type='checkbox'] {
-  background-color: #f49f00;
   border: none;
   height: 65px;
 }
@@ -172,7 +170,14 @@
 .toggleSwitch:checked[type='checkbox']::before {
   right: 1px;
   bottom: 1px;
-  background-color: #f49f00;
   box-shadow: inset -5px -2px 16px #222;
   height: 62px;
+}
+.smokingToggle:checked[type='checkbox']::before,
+.smokingToggle:checked[type='checkbox'] {
+  background-color: #f49f00;
+}
+.bedToggle:checked[type='checkbox']::before,
+.bedToggle:checked[type='checkbox'] {
+  background-color: #012e87;
 }

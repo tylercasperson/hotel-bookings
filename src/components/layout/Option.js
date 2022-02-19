@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 const Option = (props) => {
-  const [checked, setChecked] = useState(true);
-  const [label, setLabel] = useState(props.labelOne);
-  const [image, setImage] = useState(props.imageOne);
+  const [checked, setChecked] = useState(props.default);
+  const [label, setLabel] = useState(props.default ? props.labelOne : props.labelTwo);
+  const [image, setImage] = useState(props.default ? props.imageOne : props.imageTwo);
 
   const onChange = () => {
     if (checked) {
@@ -38,7 +38,7 @@ const Option = (props) => {
             width: '1.3vmin',
             transform: 'rotateY(180deg) rotate(45deg)',
             backgroundColor: checked ? props.colorOne : props.colorTwo,
-            zIndex: checked ? 1 : 0,
+            zIndex: checked ? 0 : 1,
           }}
         ></div>
         <div
@@ -54,7 +54,7 @@ const Option = (props) => {
         >
           <img
             src={image}
-            alt='smoking'
+            alt={props.className}
             style={{
               height: props.size,
               position: 'absolute',
