@@ -134,7 +134,7 @@
 }
 
 /* Smoking Option */
-.smokingToggle[type='checkbox'] {
+.toggleSwitch[type='checkbox'] {
   height: 65px;
   width: 180px;
   background-color: #ebebeb;
@@ -153,12 +153,12 @@
   margin-left: 1vw;
 }
 
-.smokingToggle:checked[type='checkbox'] {
+.toggleSwitch:checked[type='checkbox'] {
   background-color: #f49f00;
   border: none;
   height: 65px;
 }
-.smokingToggle[type='checkbox']:before {
+.toggleSwitch[type='checkbox']:before {
   width: 62px;
   height: 62px;
   background-color: #fff;
@@ -169,7 +169,7 @@
   transition: 0.3s;
   box-shadow: inset -2px -2px 6px #e3e3e3;
 }
-.smokingToggle:checked[type='checkbox']::before {
+.toggleSwitch:checked[type='checkbox']::before {
   right: 1px;
   bottom: 1px;
   background-color: #f49f00;

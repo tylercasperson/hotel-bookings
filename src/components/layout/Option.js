@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import smoking from '../icons/cigarette.png';
 
-const SmokingOption = () => {
+const Option = (props) => {
   const [checked, setChecked] = useState(true);
-  const [label, setLabel] = useState('Non-Smoking');
+  const [label, setLabel] = useState(props.labelOne);
+  const [image, setImage] = useState(props.imageOne);
 
   const onChange = () => {
     if (checked) {
       setChecked(false);
-      setLabel('Smoking');
+      setLabel(props.labelTwo);
+      setImage(props.imageTwo);
     } else {
       setChecked(true);
-      setLabel('Non-Smoking');
+      setLabel(props.labelOne);
+      setImage(props.imageOne);
     }
   };
 
@@ -26,7 +28,7 @@ const SmokingOption = () => {
           justifyContent: 'center',
           alignItems: 'center',
           position: 'relative',
-          backgroundColor: checked ? '#db3428' : 'white',
+          backgroundColor: checked ? props.colorOne : props.colorTwo,
         }}
       >
         <div
@@ -35,7 +37,7 @@ const SmokingOption = () => {
             height: '14vmin',
             width: '1.3vmin',
             transform: 'rotateY(180deg) rotate(45deg)',
-            backgroundColor: checked ? '#db3428' : 'white',
+            backgroundColor: checked ? props.colorOne : props.colorTwo,
             zIndex: checked ? 1 : 0,
           }}
         ></div>
@@ -51,10 +53,10 @@ const SmokingOption = () => {
           }}
         >
           <img
-            src={smoking}
+            src={image}
             alt='smoking'
             style={{
-              height: '8vmin',
+              height: props.size,
               position: 'absolute',
               top: '2.5vmin',
             }}
@@ -71,8 +73,8 @@ const SmokingOption = () => {
       </div>
       <input
         type='checkbox'
-        name='smokingToggle'
-        className='smokingToggle'
+        name={props.name}
+        className={`toggleSwitch ${props.className}`}
         checked={checked}
         onChange={onChange}
       />
@@ -80,4 +82,4 @@ const SmokingOption = () => {
   );
 };
 
-export default SmokingOption;
+export default Option;
