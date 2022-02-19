@@ -1,6 +1,7 @@
 import './App.css';
 import DateSlider from './components/layout/calendar/DateSlider';
 import Option from './components/layout/Option';
+import Button from './components/layout/Button';
 
 import cigarette from './components/icons/cigarette.png';
 import singleBed from './components/icons/singleBed.png';
@@ -34,6 +35,7 @@ function App() {
           className={'bedToggle'}
         />
       </div>
+      <Button />
     </div>
   );
 }

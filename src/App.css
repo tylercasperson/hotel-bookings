@@ -181,3 +181,45 @@
 .bedToggle:checked[type='checkbox'] {
   background-color: #012e87;
 }
+
+/* button */
+.button {
+  position: relative;
+  display: flex;
+  width: 180px;
+  height: 60px;
+  color: black;
+  background-color: #2497e3;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  text-transform: uppercase;
+  line-height: 25px;
+  letter-spacing: 0.3vmin;
+  margin: auto;
+  padding: 3vmin 5vmin;
+  transition: 0.3s;
+  border: 3pt solid black;
+  font-weight: 600;
+}
+
+.button:hover {
+  background: #a2a2a2 url('./components/icons/pixelBlock.png');
+  background-color: #a2a2a2;
+  height: auto;
+  transition-delay: 0.8s;
+  border: 3pt solid black;
+  transform: scale(1.2);
+  background-size: 180px;
+  animation: animate 0.8s steps(8) forwards;
+}
+
+@keyframes animate {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: -480px;
+  }
+}
