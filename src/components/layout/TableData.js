@@ -23,6 +23,8 @@ const TableData = (props) => {
             cleaning_fee={i.cleaning_fee}
             totalCharge={i.daily_rate * props.numberOfDays + i.cleaning_fee}
             backgroundColor={index % 2 === 0 ? '#bdbdbd' : '#9f9f9f'}
+            roomId={i.id}
+            reserveRoom={props.reserveRoom}
           />
         ))}
       </div>

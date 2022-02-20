@@ -50,7 +50,12 @@ const TableRow = (props) => {
           display: 'flex',
         }}
       >
-        <button className='reserveBtn' style={{ backgroundColor: props.backgroundColor }}>
+        <button
+          className='reserveBtn'
+          style={{ backgroundColor: props.backgroundColor }}
+          onClick={props.reserveRoom}
+          room_id={props.roomId}
+        >
           Reserve room
         </button>
       </div>

@@ -154,7 +154,6 @@ body {
   width: 160px;
   height: 40px;
   color: black;
-  background-color: #2497e3;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -167,6 +166,14 @@ body {
   transition: 0.3s;
   border: 3pt solid black;
   font-weight: 600;
+}
+
+.findRoomBtn {
+  background-color: #2497e3;
+}
+
+.webOrdersBtn {
+  background-color: #4cbbb9;
 }
 
 .button:hover {
