@@ -1,13 +1,9 @@
 import React from 'react';
 
-const Button = () => {
-  const onClick = () => {
-    console.log('click');
-  };
-
+const Button = (props) => {
   return (
     <div style={{ margin: '30vmin' }}>
-      <div className={'button'} onClick={onClick}>
+      <div className={'button'} onClick={props.onClick}>
         Find available rooms
       </div>
     </div>
