@@ -219,7 +219,7 @@ const DateSlider = () => {
           nextMonth={() => nextMonth('start')}
           inputBorder={'1pt solid black'}
           inputWidth={'20vw'}
-          inputFontSize={'2vh'}
+          inputFontSize={'2.5vh'}
           inputBackgroundColor={'white'}
         />
         <DateInput
@@ -236,7 +236,7 @@ const DateSlider = () => {
           nextMonth={() => nextMonth('end')}
           inputBorder={'1pt solid black'}
           inputWidth={'20vw'}
-          inputFontSize={'2vh'}
+          inputFontSize={'2.5vh'}
           inputBackgroundColor={'white'}
         />
       </div>

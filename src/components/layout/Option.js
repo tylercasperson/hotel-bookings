@@ -64,7 +64,8 @@ const Option = (props) => {
           <b
             style={{
               marginTop: '25vmin',
-              fontSize: '2.8vmin',
+              fontSize: '2.5vmin',
+              textAlign: 'center',
             }}
           >
             {label}

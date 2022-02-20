@@ -15,7 +15,7 @@ const TableHeader = () => {
         style={{
           width: '9vw',
           margin: 'auto 2vw auto 2vw',
-          fontSize: '2.8vmin',
+          fontSize: '2.5vmin',
         }}
       >
         Number of Beds
@@ -24,7 +24,7 @@ const TableHeader = () => {
         style={{
           width: '8vw',
           margin: 'auto 2vw auto 2vw',
-          fontSize: '2.8vmin',
+          fontSize: '2.5vmin',
         }}
       >
         Allow Smoking
@@ -33,7 +33,7 @@ const TableHeader = () => {
         style={{
           width: '8vw',
           margin: 'auto 2vw auto 2vw',
-          fontSize: '2.8vmin',
+          fontSize: '2.5vmin',
         }}
       >
         Daily Rate
@@ -42,7 +42,7 @@ const TableHeader = () => {
         style={{
           width: '8vw',
           margin: 'auto 2vw auto 2vw',
-          fontSize: '2.8vmin',
+          fontSize: '2.5vmin',
         }}
       >
         Cleaning Fee
@@ -51,7 +51,7 @@ const TableHeader = () => {
         style={{
           width: '8vw',
           margin: 'auto 2vw auto 2vw',
-          fontSize: '2.8vmin',
+          fontSize: '2.5vmin',
         }}
       >
         Total Charge
@@ -60,7 +60,7 @@ const TableHeader = () => {
         style={{
           width: '8vw',
           margin: 'auto 2vw auto 2vw',
-          fontSize: '2.8vmin',
+          fontSize: '2.5vmin',
         }}
       >
         Reserve Room

@@ -2,7 +2,7 @@ import React from 'react';
 
 const TableRow = (props) => {
   return (
-    <div className='tableRow' style={{ display: 'flex', fontSize: '2.7vmin', textAlign: 'center' }}>
+    <div className='tableRow' style={{ display: 'flex', fontSize: '2.5vmin', textAlign: 'center' }}>
       <div
         style={{
           width: '8.5vw',
@@ -50,7 +50,9 @@ const TableRow = (props) => {
           display: 'flex',
         }}
       >
-        <button style={{ backgroundColor: props.backgroundColor }}>Reserve room</button>
+        <button className='reserveBtn' style={{ backgroundColor: props.backgroundColor }}>
+          Reserve room
+        </button>
       </div>
     </div>
   );

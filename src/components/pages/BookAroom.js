@@ -6,9 +6,9 @@ import Option from '../layout/Option';
 import Button from '../layout/Button';
 import TableData from '../layout/TableData';
 
-import cigarette from '../icons/cigarette.png';
-import singleBed from '../icons/singleBed.png';
-import doubleBed from '../icons/doubleBed.png';
+import cigarette from '../images/cigarette.png';
+import oneBed from '../images/oneBed.png';
+import twoBeds from '../images/twoBeds.png';
 
 import requests from '../data/requests.json';
 import reservations from '../data/reservations.json';
@@ -76,7 +76,7 @@ const BookAroom = () => {
   return (
     <div ref={reservationForm}>
       <DateSlider />
-      <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '2vh' }}>
         <Option
           default={false}
           imageOne={cigarette}
@@ -91,18 +91,18 @@ const BookAroom = () => {
         />
         <Option
           default={true}
-          imageOne={doubleBed}
-          labelOne={'Double Bed'}
-          imageTwo={singleBed}
-          labelTwo={'Single Bed'}
-          size={'12vmin'}
+          imageOne={twoBeds}
+          labelOne={'Two Beds'}
+          imageTwo={oneBed}
+          labelTwo={'One Bed'}
+          size={'10vmin'}
           name={'bedToggle'}
           className={'bedToggle'}
         />
       </div>
       <Button onClick={onClick} />
       {availableRoomsArr.length === 0 ? (
-        <div style={{ textAlign: 'center', fontSize: '4vmin', fontWeight: '600' }}>{message}</div>
+        <div style={{ textAlign: 'center', fontSize: '3vmin', fontWeight: '600' }}>{message}</div>
       ) : (
         <TableData
           array={availableRoomsArr}
