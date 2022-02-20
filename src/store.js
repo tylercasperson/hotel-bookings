@@ -4,23 +4,27 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { format, add } from 'date-fns';
 
 import { dateFormat } from './components/data/formulas/dateFormulas';
-import requests from './components/data/initialData/requests.json';
+import rooms from './components/data/initialData/rooms.json';
 import reservations from './components/data/initialData/reservations.json';
 
 import { datesReducer } from './components/data/reducers/settingsReducers.js';
+import {
+  reservationListReducer,
+  reservationSaveReducer,
+  reservationUndoReducer,
+} from './components/data/reducers/reservationReducers.js';
 
 const reducer = combineReducers({
   dates: datesReducer,
+  reservationList: reservationListReducer,
+  reservationSave: reservationSaveReducer,
+  reservationUndo: reservationUndoReducer,
 });
 
 const gatherDates = () => {
   let dateArr = [];
 
   reservations.reservations.map((i) => {
-    return dateArr.push(dateFormat(i.checkin_date), dateFormat(i.checkout_date));
-  });
-
-  requests.requests.map((i) => {
     return dateArr.push(dateFormat(i.checkin_date), dateFormat(i.checkout_date));
   });
 
@@ -32,6 +36,15 @@ const gatherDates = () => {
 
   return { minDate, maxDate };
 };
+
+let reservationListFromData = localStorage.getItem('reservationList')
+  ? JSON.parse(localStorage.getItem('reservationList'))
+  : rooms.rooms
+      .map((i) => ({
+        ...i,
+        ...reservations.reservations.find((j) => j.room_id === i.id),
+      }))
+      .filter((k) => k.checkin_date !== undefined);
 
 const startDateFromStorage = localStorage.getItem('startDate')
   ? JSON.parse(localStorage.getItem('startDate'))
@@ -51,6 +64,7 @@ const initialState = {
     minDate: minDateFromData,
     maxDate: maxDateFromData,
   },
+  reservationList: reservationListFromData,
 };
 
 const middleware = [thunk];

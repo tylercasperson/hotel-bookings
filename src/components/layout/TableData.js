@@ -3,6 +3,7 @@ import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
 const TableData = (props) => {
+  console.log(props.numberOfDays);
   return (
     <div
       style={{
@@ -25,6 +26,7 @@ const TableData = (props) => {
             backgroundColor={index % 2 === 0 ? '#bdbdbd' : '#9f9f9f'}
             roomId={i.id}
             reserveRoom={props.reserveRoom}
+            text={props.roomReserved ? 'Reserve room' : 'Undo Reservation'}
           />
         ))}
       </div>

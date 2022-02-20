@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const TableRow = (props) => {
+  const [text, setText] = useState('Reserve room');
+
+  const onClick = () => {
+    console.log(text);
+    if (text.split(' ')[0] === 'Undo') {
+      setText('Reserve room');
+    } else {
+      setText('Undo Reservation');
+    }
+  };
+
   return (
     <div className='tableRow' style={{ display: 'flex', fontSize: '2.5vmin', textAlign: 'center' }}>
       <div
@@ -54,9 +65,10 @@ const TableRow = (props) => {
           className='reserveBtn'
           style={{ backgroundColor: props.backgroundColor }}
           onClick={props.reserveRoom}
+          onClickCapture={onClick}
           room_id={props.roomId}
         >
-          Reserve room
+          {text}
         </button>
       </div>
     </div>
