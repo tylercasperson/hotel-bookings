@@ -10,9 +10,9 @@ import cigarette from '../images/cigarette.png';
 import oneBed from '../images/oneBed.png';
 import twoBeds from '../images/twoBeds.png';
 
-import { availableRooms } from '../data/availableRooms';
-import requests from '../data/requests.json';
-import reservations from '../data/reservations.json';
+import { availableRooms } from '../data/formulas/availableRooms';
+import requests from '../data/initialData/requests.json';
+import reservations from '../data/initialData/reservations.json';
 
 const BookAroom = () => {
   const reservationForm = useRef();

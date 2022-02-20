@@ -5,7 +5,7 @@ import {
   monthCode,
   centuryCode,
   digityearCode,
-} from '../../data/dateFormulas';
+} from '../../data/formulas/dateFormulas';
 import WeekLineUp from './WeekSetup';
 
 const MonthSetup = (props) => {

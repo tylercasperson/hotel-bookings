@@ -1,6 +1,6 @@
-import { dateFormat } from './dateFormulas';
-import rooms from './rooms.json';
-import reservations from './reservations.json';
+import { dateFormat } from '../formulas/dateFormulas';
+import rooms from '../initialData/rooms.json';
+import reservations from '../initialData/reservations.json';
 
 export const availableRooms = (startDate, endDate, allowSmoking, numberOfBeds) => {
   let bedsPerRoom = numberOfBeds === 1 ? rooms.rooms : rooms.rooms.filter((i) => i.num_beds === 2);
