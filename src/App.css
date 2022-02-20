@@ -223,3 +223,7 @@
     background-position-y: -480px;
   }
 }
+/* sales table */
+.tableRow:nth-child(odd) {
+  background-color: lightgray;
+}

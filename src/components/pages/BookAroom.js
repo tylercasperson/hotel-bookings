@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { differenceInDays } from 'date-fns';
 import { dateFormat } from '../data/dateFormulas';
 import DateSlider from '../layout/calendar/DateSlider';
 import Option from '../layout/Option';
 import Button from '../layout/Button';
+import TableData from '../layout/TableData';
 
 import cigarette from '../icons/cigarette.png';
 import singleBed from '../icons/singleBed.png';
@@ -14,6 +16,18 @@ import rooms from '../data/rooms.json';
 
 const BookAroom = () => {
   const reservationForm = useRef();
+
+  const [availableRoomsArr, setAvailableRoomsArr] = useState([]);
+  const [message, setMessage] = useState('Please enter information for available hotel rooms');
+
+  const getDates = () => {
+    let dateSection = reservationForm.current.children[0].children[0].children;
+    let startDate = dateSection[0].children[0].children[1].value;
+    let endDate = dateSection[1].children[0].children[1].value;
+
+    return { startDate, endDate };
+  };
+
   const onClick = () => {
     console.log('click');
     let dateSection = reservationForm.current.children[0].children[0].children;
@@ -53,7 +67,11 @@ const BookAroom = () => {
       }
     }
 
-    console.log(andSmokingChoice);
+    setAvailableRoomsArr(andSmokingChoice);
+
+    if (andSmokingChoice.length === 0) {
+      setMessage('No rooms are available that fit your qualifications');
+    }
   };
   return (
     <div ref={reservationForm}>
@@ -83,6 +101,16 @@ const BookAroom = () => {
         />
       </div>
       <Button onClick={onClick} />
+      {availableRoomsArr.length === 0 ? (
+        <div style={{ textAlign: 'center', fontSize: '4vmin', fontWeight: '600' }}>{message}</div>
+      ) : (
+        <TableData
+          array={availableRoomsArr}
+          numberOfDays={
+            differenceInDays(new Date(getDates().endDate), new Date(getDates().startDate)) + 1
+          }
+        />
+      )}
     </div>
   );
 };
