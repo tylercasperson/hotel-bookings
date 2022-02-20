@@ -1,34 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { add, differenceInDays, format } from 'date-fns';
 
 import { monthList, daysPerMonth } from '../../data/formulas/dateFormulas';
+import { saveStartDate, saveEndDate } from '../../data/actions/settingsActions';
 
 import DateInput from './DateInput';
 
 const DateSlider = () => {
-  const [startDate, setStartDate] = useState(format(Date.now(), 'M/d/yyyy'));
-  const [endDate, setEndDate] = useState(
-    format(
-      add(new Date(), {
-        days: 7,
-      }),
-      'M/d/yyyy'
-    )
-  );
+  const dispatch = useDispatch();
+
+  const getFromState = useSelector((state) => state);
+  const { startDate, endDate, minDate, maxDate } = getFromState.dates;
+
+  console.log(minDate);
+  console.log(maxDate);
+
   const [tempStartDate, setTempStartDate] = useState(startDate);
   const [tempEndDate, setTempEndDate] = useState(endDate);
   const [displayStartDate, setDisplayStartDate] = useState(startDate);
   const [displayEndDate, setDisplayEndDate] = useState(endDate);
   const [showHide, setShowHide] = useState('hide');
-  const [minDate] = useState(format(Date.now(), 'M/d/yyyy'));
-  const [maxDate] = useState(
-    format(
-      add(new Date(minDate), {
-        days: 90,
-      }),
-      'M/d/yyyy'
-    )
-  );
   const [sliderOne, setSliderOne] = useState(0);
   const [sliderTwo, setSliderTwo] = useState(100);
   const [sliderMin] = useState(0);
@@ -45,15 +37,18 @@ const DateSlider = () => {
     }
 
     const saveDate = () => {
+      console.log('e.target', e.target);
       if (e.target.name === 'startDate') {
-        setStartDate(e.target.value);
+        dispatch(saveStartDate(e.target.value));
       } else if (e.target.name === 'endDate') {
-        setEndDate(e.target.value);
+        dispatch(saveEndDate(e.target.value));
       }
     };
 
     const dateValidation = (date) => {
+      console.log('validation', date);
       let dateParts = date.split('/');
+      console.log(dateParts);
 
       if (dateParts.length === 3) {
         if (parseInt(dateParts[2]) > 0 && parseInt(dateParts[2]) < 9999) {
@@ -99,10 +94,10 @@ const DateSlider = () => {
 
   const onClick = (e, type) => {
     if (type === 'start') {
-      setStartDate(e.target.attributes.date.value);
+      dispatch(saveStartDate(e.target.attributes.date.value));
       setTempStartDate(e.target.attributes.date.value);
     } else {
-      setEndDate(e.target.attributes.date.value);
+      dispatch(saveEndDate(e.target.attributes.date.value));
       setTempEndDate(e.target.attributes.date.value);
     }
   };
@@ -162,9 +157,9 @@ const DateSlider = () => {
         'M/d/yyyy'
       );
 
-      setStartDate(dateStart);
+      dispatch(saveStartDate(dateStart));
       setTempStartDate(dateStart);
-      setEndDate(dateEnd);
+      dispatch(saveEndDate(dateEnd));
       setTempEndDate(dateEnd);
     };
 
@@ -180,17 +175,22 @@ const DateSlider = () => {
 
   useEffect(() => {
     if (!sliderLock) {
-      setSliderOne(differenceInDays(new Date(startDate), new Date(minDate)));
-      setSliderTwo(differenceInDays(new Date(endDate), new Date(minDate)));
+      let oneSlider =
+        startDate === minDate ? 0 : differenceInDays(new Date(startDate), new Date(minDate));
+      let twoSlider =
+        endDate === minDate ? 0 : differenceInDays(new Date(endDate), new Date(minDate));
+
+      setSliderOne(oneSlider);
+      setSliderTwo(twoSlider);
     }
     if (load) {
-      setSliderMax(differenceInDays(new Date(maxDate), new Date(minDate)));
+      setSliderMax();
       setLoad(false);
     }
     setMonthTracker([0, 0]);
     setDisplayStartDate(startDate);
     setDisplayEndDate(endDate);
-  }, [startDate, endDate, minDate, maxDate, load, sliderLock]);
+  }, [dispatch, startDate, endDate, minDate, maxDate, load, sliderLock]);
 
   return (
     <div className='dateSection'>
@@ -219,7 +219,7 @@ const DateSlider = () => {
           nextMonth={() => nextMonth('start')}
           inputBorder={'1pt solid black'}
           inputWidth={'20vw'}
-          inputFontSize={'2.5vh'}
+          inputFontSize={'2vh'}
           inputBackgroundColor={'white'}
         />
         <DateInput
@@ -236,7 +236,7 @@ const DateSlider = () => {
           nextMonth={() => nextMonth('end')}
           inputBorder={'1pt solid black'}
           inputWidth={'20vw'}
-          inputFontSize={'2.5vh'}
+          inputFontSize={'2vh'}
           inputBackgroundColor={'white'}
         />
       </div>

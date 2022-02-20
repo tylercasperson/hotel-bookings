@@ -124,7 +124,7 @@ export const digityearCode = {
 };
 
 export const dateFormat = (date) => {
-  let dateParts = date.split('-');
+  let dateParts = date.includes('/') ? date.split('/') : date.split('-');
   let month = dateParts[1][0] === '0' ? dateParts[1][1] : dateParts[1];
   let day = dateParts[2][0] === '0' ? dateParts[2][1] : dateParts[2];
   let year = dateParts[0];
