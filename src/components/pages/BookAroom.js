@@ -1,8 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { differenceInDays, max, min } from 'date-fns';
 
-import { saveReservation, undoReservation } from '../data/actions/reservationActions';
+import {
+  listReservations,
+  saveReservation,
+  undoReservation,
+} from '../data/actions/reservationActions';
 
 import { availableRooms } from '../data/formulas/availableRooms';
 import requests from '../data/initialData/requests.json';
@@ -24,15 +28,27 @@ const BookAroom = () => {
   const { startDate, endDate } = getFromState.dates;
   const { reservationList } = getFromState;
 
-  console.log(getFromState);
-
   const reservationForm = useRef();
 
   const [availableRoomsArr, setAvailableRoomsArr] = useState([]);
   const [message, setMessage] = useState('Please enter information for available hotel rooms');
+  const [reset, setReset] = useState(false);
   const [lock, setLock] = useState(true);
 
-  console.log(availableRoomsArr);
+  const onChange = () => {
+    if (message === 'tableData') {
+      Array.from(reservationForm.current.children[3].children[1].children).map(
+        (i) => (i.children[5].children[0].innerText = 'Reserve room')
+      );
+
+      // reservationForm.current.children[3].children[1].children.map(
+      //   (i) => (i[0].children[5].children[0].innerText = 'Reserve room')
+      // );
+    }
+
+    setReset(true);
+    setLock(true);
+  };
 
   const getPageInfo = () => {
     let toggleSection = reservationForm.current.children[1];
@@ -57,13 +73,16 @@ const BookAroom = () => {
       reservationList
     );
 
-    console.log(roomsAvailable);
-
     setAvailableRoomsArr(roomsAvailable);
+    // setLock(true);
+    // dispatch(listReservations());
 
     if (roomsAvailable.length === 0) {
       setMessage('No rooms are available that fit your qualifications');
+    } else {
+      setMessage('tableData');
     }
+    dispatch(listReservations(availableRoomsArr));
   };
 
   const processWebOrders = () => {
@@ -73,7 +92,7 @@ const BookAroom = () => {
     //     availableRooms(i.checkin_date, i.checkout_date, i.is_smoker, i.min_beds, reservationList)
     //   )
     // );
-    // console.log(arr);
+
     // let data = getPageInfo();
     // data.startDate = '1/1/2020';
 
@@ -82,10 +101,7 @@ const BookAroom = () => {
   };
 
   const reserveRoom = ({ target }) => {
-    console.log('target', target.innerText);
-
     if (target.innerText.split(' ')[0] === 'Undo') {
-      console.log('save');
       dispatch(
         saveReservation(
           {
@@ -111,6 +127,14 @@ const BookAroom = () => {
     return daysDifference;
   };
 
+  useEffect(() => {
+    if (lock) {
+      dispatch(listReservations(reservationList));
+      setLock(false);
+      setReset(false);
+    }
+  }, [dispatch, lock, reservationList]);
+
   return (
     <div ref={reservationForm}>
       <DateSlider />
@@ -126,6 +150,7 @@ const BookAroom = () => {
           size={'8vmin'}
           name={'smokingToggle'}
           className={'smokingToggle'}
+          onChange={onChange}
         />
         <Option
           default={true}
@@ -136,6 +161,7 @@ const BookAroom = () => {
           size={'10vmin'}
           name={'bedToggle'}
           className={'bedToggle'}
+          onChange={onChange}
         />
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
@@ -153,6 +179,7 @@ const BookAroom = () => {
           array={availableRoomsArr}
           numberOfDays={numberOfDays()}
           reserveRoom={reserveRoom}
+          reset={reset}
         />
       )}
     </div>

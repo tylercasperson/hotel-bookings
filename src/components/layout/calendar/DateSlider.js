@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { add, differenceInDays, format } from 'date-fns';
 
@@ -13,8 +13,7 @@ const DateSlider = () => {
   const getFromState = useSelector((state) => state);
   const { startDate, endDate, minDate, maxDate } = getFromState.dates;
 
-  console.log(minDate);
-  console.log(maxDate);
+  const dateSlider = useRef();
 
   const [tempStartDate, setTempStartDate] = useState(startDate);
   const [tempEndDate, setTempEndDate] = useState(endDate);
@@ -29,7 +28,13 @@ const DateSlider = () => {
   const [sliderLock, setSliderLock] = useState(false);
   const [monthTracker, setMonthTracker] = useState([0, 0]);
 
+  const resetButtons = () => {
+    let table = dateSlider.current.parentElement.children[3].children[1].children;
+    Array.from(table).map((i) => (i.children[5].children[0].innerText = 'Reserve room'));
+  };
+
   const dateCapture = (e) => {
+    resetButtons();
     if (e.target.name === 'startDate') {
       setTempStartDate(e.target.value);
     } else if (e.target.name === 'endDate') {
@@ -37,7 +42,6 @@ const DateSlider = () => {
     }
 
     const saveDate = () => {
-      console.log('e.target', e.target);
       if (e.target.name === 'startDate') {
         dispatch(saveStartDate(e.target.value));
       } else if (e.target.name === 'endDate') {
@@ -46,9 +50,7 @@ const DateSlider = () => {
     };
 
     const dateValidation = (date) => {
-      console.log('validation', date);
       let dateParts = date.split('/');
-      console.log(dateParts);
 
       if (dateParts.length === 3) {
         if (parseInt(dateParts[2]) > 0 && parseInt(dateParts[2]) < 9999) {
@@ -93,6 +95,7 @@ const DateSlider = () => {
   };
 
   const onClick = (e, type) => {
+    resetButtons();
     if (type === 'start') {
       dispatch(saveStartDate(e.target.attributes.date.value));
       setTempStartDate(e.target.attributes.date.value);
@@ -126,6 +129,7 @@ const DateSlider = () => {
   };
 
   const sliderChange = (e) => {
+    resetButtons();
     setSliderLock(true);
 
     const sliderToDates = (value) => {
@@ -193,7 +197,7 @@ const DateSlider = () => {
   }, [dispatch, startDate, endDate, minDate, maxDate, load, sliderLock]);
 
   return (
-    <div className='dateSection'>
+    <div className='dateSection' ref={dateSlider}>
       <div
         style={{
           display: 'flex',

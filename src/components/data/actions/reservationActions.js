@@ -26,8 +26,6 @@ export const saveReservation = (reservation, array) => async (dispatch) => {
     type: RESERVATIONS_SAVE_SUCCESS,
     payload: listOfReservations,
   });
-
-  console.log('saveRes', listOfReservations);
 };
 
 export const undoReservation = () => async (dispatch) => {

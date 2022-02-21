@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 
 const TableRow = (props) => {
-  const [text, setText] = useState('Reserve room');
+  const reserveBtn = useRef();
 
   const onClick = () => {
-    console.log(text);
-    if (text.split(' ')[0] === 'Undo') {
-      setText('Reserve room');
+    if (reserveBtn.current.innerText.split(' ')[0] === 'Undo') {
+      reserveBtn.current.innerText = 'Reserve room';
     } else {
-      setText('Undo Reservation');
+      reserveBtn.current.innerText = 'Undo Reservation';
     }
   };
 
@@ -67,8 +66,9 @@ const TableRow = (props) => {
           onClick={props.reserveRoom}
           onClickCapture={onClick}
           room_id={props.roomId}
+          ref={reserveBtn}
         >
-          {text}
+          Reserve room
         </button>
       </div>
     </div>

@@ -78,6 +78,7 @@ const Option = (props) => {
         className={`toggleSwitch ${props.className}`}
         checked={checked}
         onChange={onChange}
+        onChangeCapture={props.onChange}
       />
     </div>
   );
